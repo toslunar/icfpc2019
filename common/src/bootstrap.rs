@@ -3,12 +3,14 @@ use crate::*;
 // 更新されたタスク、ここまでのアクション列、プレイヤーの状態
 pub type BootstrapResult = (RasterizedTask, Vec<Action>, PlayerState);
 
-impl PlayerState {
-    fn has_expand(&self) -> bool {
-        self.unused_boosters
-            .iter()
-            .any(|&b| b == Booster::Extension)
+fn has_expand(player_state: &PlayerState, booster_map: &BoosterMap) -> bool {
+    pos = player_state.pos();
+    if booster_map[pos.0][pos.1] == Some(Booster::Extension) {
+        return true;
     }
+    self.unused_boosters
+        .iter()
+        .any(|&b| b == Booster::Extension)
 }
 
 pub enum ExpandStrategy {
